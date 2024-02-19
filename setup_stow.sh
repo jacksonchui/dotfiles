@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. $HOME/dotfiles/scripts/utils.sh
+
 stow_dotfiles() {
 	files=( \
 	  ".gitconfig"
@@ -18,7 +20,7 @@ stow_dotfiles() {
 	  ".config/me"
 	)
 
-	echo "Removing existing config files"
+	warn "Removing existing config files"
 	for f in "${files[@]}"; do
 	  rm -rf "$HOME/$f" || true
 	done
@@ -32,6 +34,6 @@ stow_dotfiles() {
 	dotfiles="git me nvim ripgrep skhd ssh tmux yabai zsh"
 
 
-	echo "INFO: Stowing: $dotfiles"
+	info "Stowing: $dotfiles"
 	stow -d stow --verbose 1 --target $HOME $dotfiles
 }

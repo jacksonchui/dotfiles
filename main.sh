@@ -9,8 +9,9 @@ set -o pipefail
 . scripts/oh-my-zsh.sh
 . setup_stow.sh
 . scripts/brew.sh
-. scripts/setup_mas.sh
 . scripts/osx.sh
+. scripts/setup_mas.sh
+. scripts/tmux_tpm.sh
 
 cleanup() {
 	err "Last command failed"
@@ -33,14 +34,17 @@ install_xcode() {
 
 
 main() {
-  info "Installing ..."
+  warn "Setting up OSX"
+  echo -e "\n"
 
+  info "################################################################################"
+  info "Xcode Commandline Tools"
+  info "################################################################################"
   install_xcode
 
   info "################################################################################"
   info "Homebrew Packages"
   info "################################################################################"
-  wait_input
   install_homebrew
   success "Finished installing Homebrew packages"
 
@@ -67,6 +71,14 @@ main() {
   wait_input
   install_go_tools
   success "Finished installing Golang tools"
+
+  info "################################################################################"
+  info "Tmux Plugins"
+  info "################################################################################"
+  wait_input
+  install_tmux_tpm
+  success "Finished installing tmux plugins"
+
 
   info "################################################################################"
   info "Configuration"
