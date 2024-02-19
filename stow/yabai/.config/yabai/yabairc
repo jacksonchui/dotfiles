@@ -1,0 +1,21 @@
+# bsp, stack or float
+yabai -m config layout bsp
+
+# tile main window to the right
+yabai -m config window_placement second_child
+
+yabai -m config top_padding 5
+yabai -m config bottom_padding 5
+yabai -m config left_padding 5
+yabai -m config right_padding 5
+yabai -m config window_gap 5
+
+# -- Omit these applications from tiling -- #
+# yabai -m query --windows | jq ".[] | { App: .app, Title: .title }"
+yabai -m rule --add label="System Preferences" app="^System Settings$" title=".*" manage=off
+yabai -m rule --add label="Cron" app="^Cron$" title=".*" manage=off
+yabai -m rule --add label="Things" app="^Things$" title=".*" manage=off
+yabai -m rule --add label="Vysor" app="^Vysor$" title=".*" manage=off
+yabai -m rule --add label="Music MiniPlayer" app="^Music$" title="^MiniPlayer$" manage=off
+yabai -m rule --add label="Messages" app="^Messages$" title=".*" manage=off
+

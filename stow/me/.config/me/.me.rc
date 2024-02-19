@@ -1,0 +1,33 @@
+# My Work Agnostic Profile for paths, vim, etc
+# My Setup
+
+echo "Sourcing me config..."
+
+## EXPORT ##
+# Default editor for all programs
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# Use Rg as the default for FZF
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
+
+# Load add-on if not in path
+if ! echo "$PATH" | grep -q "$MY_SCRIPTS_HOME"; then
+  PATH="$MY_SCRIPTS_HOME:$PATH"
+fi
+
+## TMUX ##
+SESSION_TAG="focus"
+function setup_env() {
+  # Check if the "focus" session already exists
+  if tmux has-session -t $SESSION_TAG; then
+      # If the session exists, attach to it
+      tmux attach-session -t $SESSION_TAG
+  else
+      # If the session doesn't exist, create and attach to it
+      tmux new-session -s $SESSION_TAG
+  fi
+}

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+rm -rf ~/.config/bash
+if [ -e "~/.config/nvim" ]; then
+    mv "~/.config/nvim" "~/.config/nvim_$(date '+%s')"
+fi
+ln -s $(pwd) ~/.config/nvim
