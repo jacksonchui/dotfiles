@@ -22,9 +22,10 @@ end
 
 -- Search vim config to find stuff
 M.find_config_files = function()
-  local config_dir = vim.env.HOME .. '/.config/nvim'
+  local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+  local config_dir = home .. '/.config/nvim'
   require("telescope.builtin").find_files {
-    find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden', config_dir },
+    find_command = { 'rg', '--follow', '--files', '--iglob', '!.git', '--hidden', config_dir },
     previewer = false
   }
 end

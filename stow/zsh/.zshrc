@@ -109,3 +109,5 @@ fi
 
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/rg
+
