@@ -21,7 +21,7 @@ alias l='ls -CF'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Aliases I rely on
-alias reload-profile="source $JC_DOTFILES/config/my_rc"
+alias reload-profile="source ~/.zshrc"
 alias gitlog="git log --oneline --graph"
 alias ftgz="tar --use-compress-program=pigz -zcvf"
 # For X11 refresh
