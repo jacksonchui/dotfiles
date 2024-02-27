@@ -7,6 +7,7 @@ stow_dotfiles() {
 	  ".gitconfig"
 	  ".ssh/config"
 	  ".tmux.conf"
+	  ".wezterm.lua"
 	  ".zprofile"
 	  ".zshrc"
 	  ".zshrc.omz"
@@ -32,7 +33,7 @@ stow_dotfiles() {
 	done
 
 	# name of the folder...
-	dotfiles="git me nvim ripgrep skhd ssh tmux yabai zsh"
+	dotfiles="git me nvim ripgrep skhd ssh starship tmux yabai wezterm zsh"
 
 
 	info "Stowing: $dotfiles"

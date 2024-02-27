@@ -8,10 +8,12 @@ require('core.keymaps')
 -- plugins
 require('core.plugins.mini_files_config')
 require('core.plugins.harpoon') 	  -- Fast file switcher (C-a)
-require('core.plugins.treesitter')        -- nav file faster
-require('core.plugins.telescope')         -- fuzzy searching
 require('core.plugins.lsp')        	  -- lsp
 require('core.plugins.nvim-cmp')          -- autocomplete
+require('core.plugins.obsidian')          -- obsidian
+require('core.plugins.treesitter')        -- nav file faster
+require('core.plugins.telescope')         -- fuzzy searching
+require('core.plugins.zenmode')           -- zenmode
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

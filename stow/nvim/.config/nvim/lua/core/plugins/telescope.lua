@@ -65,3 +65,4 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set("n", "<leader>z", "<cmd>Telescope undo<cr>", {desc = "Is ctrl-z"})
 vim.keymap.set("n", "<leader>u", function() require("telescope").extensions.undo.undo({ side_by_side = true }) end, {desc = "Show [u]ndo tree"})
 
+vim.api.nvim_set_keymap("n", "<Leader><tab>", "<Cmd>lua require('telescope.builtin').commands()<CR>", {noremap=false})
