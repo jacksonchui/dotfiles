@@ -11,21 +11,32 @@ require('telescope').setup {
   },
 }
 
-
+-- modified version of telescope commands relative to open directory
 local M = {}
+local tb = require('telescope.builtin')
 
+-- Returns passed in directory, if available.
+-- Else returns the directory nvim buffer was opened in
 function M.GetOpenedDirectory()
   local args = vim.fn.argv()
   if #args > 0 and vim.fn.isdirectory(args[1]) == 1 then
     return args[1]
   end
-  return nil
+  return require('telescope.utils').buffer_dir()
 end
 
 M.find_files = function()
-  require('telescope.builtin').find_files {
+  tb.find_files {
     -- Get the list of arguments passed to Neovim
     find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden', M.GetOpenedDirectory()},
+    previewer = false
+  }
+end
+
+M.live_grep = function()
+  tb.live_grep {
+    cwd = M.GetOpenedDirectory(),
+    disable_coordinates = true,
     previewer = false
   }
 end
@@ -34,7 +45,7 @@ end
 M.find_config_files = function()
   local home = os.getenv("HOME") or os.getenv("USERPROFILE")
   local config_dir = home .. '/.config/nvim'
-  require("telescope.builtin").find_files {
+  tb.find_files {
     find_command = { 'rg', '--follow', '--files', '--iglob', '!.git', '--hidden', config_dir },
     previewer = false
   }
@@ -59,7 +70,7 @@ vim.keymap.set('n', '<leader>sf', M.find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sc', M.find_config_files, { desc = '[S]earch [C]onfig files for docs' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord under cursor' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sg', M.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 vim.keymap.set("n", "<leader>z", "<cmd>Telescope undo<cr>", {desc = "Is ctrl-z"})

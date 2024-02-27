@@ -7,7 +7,7 @@ require('nvim-treesitter.configs').setup {
     'python', 'rust',
     'tsx', 'typescript',
     'vimdoc', 'vim',
-    "markdown",
+    "markdown", "markdown_inline",
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

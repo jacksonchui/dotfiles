@@ -49,7 +49,13 @@ require('mini.files').setup({
   },
 }) -- end of require('mini.files')
 
-vim.keymap.set('n', '<leader>pv', MiniFiles.open, { desc = '[p]re[v]iew my filetree' })
-vim.keymap.set('n', '<leader>b', MiniFiles.open, { desc = '[p]re[v]iew my filetree' })
-vim.keymap.set('n', '<C-b>', MiniFiles.open, { desc = '[p]re[v]iew my filetree' })
+
+-- toggle minifiles between dir for current buff and closing
+local minifiles_toggle = function(...)
+    if not MiniFiles.close() then MiniFiles.open(vim.api.nvim_buf_get_name(0)) end
+  end
+
+vim.keymap.set('n', '<leader>pv', minifiles_toggle, { desc = '[p]re[v]iew my filetree' })
+vim.keymap.set('n', '<leader>b', minifiles_toggle, { desc = '[p]re[v]iew my filetree' })
+vim.keymap.set('n', '<C-b>', minifiles_toggle, { desc = '[p]re[v]iew my filetree' })
 

@@ -24,7 +24,12 @@ require('lazy').setup({
     'tpope/vim-fugitive',                          -- :Git
     'tpope/vim-sleuth',                            -- TODO: tabstop + shiftwidth
     'theprimeagen/harpoon',                        -- buffer store
-    'folke/zen-mode.nvim',                         -- Center Buffer
+    {
+        'folke/zen-mode.nvim',                     -- focus mode
+        dependencies = {
+            'folke/twilight.nvim',                 -- highlight current line
+        },
+    },
     {   -- amazing file tree
         'echasnovski/mini.files',
         version = false,
