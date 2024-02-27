@@ -1,8 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 DOTFILES_CONFIG_PATH=${JC_DOTFILES:-"$HOME/dotfiles"}/config
 
-
-[[ $SHELL == *zsh ]] && echo "Enabling Oh My Zsh" && . $HOME/.zshrc.omz
+eval "$(starship init zsh)"
 
 echo "Using my_rc..."
 

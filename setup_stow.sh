@@ -18,6 +18,7 @@ stow_dotfiles() {
 	  ".config/ripgrep"
 	  ".config/yabai"
 	  ".config/me"
+	  ".config/starship"
 	)
 
 	warn "Removing existing config files"

@@ -6,7 +6,6 @@ set -o pipefail
 
 . scripts/utils.sh
 . scripts/cli.sh
-. scripts/oh-my-zsh.sh
 . setup_stow.sh
 . scripts/brew.sh
 . scripts/osx.sh
@@ -48,15 +47,8 @@ main() {
   install_homebrew
   success "Finished installing Homebrew packages"
 
-  info "################################################################################"
-  info "Oh-my-zsh"
-  info "################################################################################"
-  wait_input
-  install_oh_my_zsh
-  success "Finished installing Oh-my-zsh"
-
   setup_fzf_completion
-  success "Finished setting up fzf completition"
+  success "Finished setting up fzf completion"
 
   info "################################################################################"
   info "MacOS Apps"

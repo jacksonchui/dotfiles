@@ -12,7 +12,6 @@
 ├── scripts
 │   ├── brew.sh
 │   ├── cli.sh
-│   ├── oh-my-zsh.sh
 │   ├── osx.sh
 │   ├── setup_mas.sh
 │   ├── tmux_tpm.sh
