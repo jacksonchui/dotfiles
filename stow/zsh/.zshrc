@@ -112,3 +112,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/rg
 
 eval "$(zoxide init --cmd cd zsh)"
 
+## Obsidian
+export ZET_INBOX_DIR="$HOME/git/obsidian/brain/0-inbox"
+export PATH="$PATH:$HOME/dotfiles/scripts"
+
