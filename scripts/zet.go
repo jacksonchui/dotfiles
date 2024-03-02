@@ -22,7 +22,7 @@ func getFilename() string {
 func getTemplateDefault(filename string) string {
   timestamp := time.Now().Format("20060102150405")
   return fmt.Sprintf(
-    "---\nid:\"%s\"\naliases:\ntags:\n---\n\n# %s\n\n\n## Notes",
+    "---\nid: %s\naliases:\ntags:\n---\n\n# %s\n\n\n## Notes",
     timestamp,
     filename,
   )
