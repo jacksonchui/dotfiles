@@ -19,6 +19,15 @@ install_go_tools() {
 	done
 }
 
+init_rust() {
+  rustup-init --quiet -y
+  source "$HOME/.cargo/env"
+}
+
 setup_fzf_completion() {
-  /opt/homebrew/opt/fzf/install --no-fish --completion
+  /opt/homebrew/opt/fzf/install \
+    --no-fish \
+    --key-bindings \
+    --completion \
+    --no-update-rc
 }

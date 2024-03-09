@@ -36,6 +36,7 @@ vim.keymap.set("n", "tj", ":bprev<enter>", {noremap=false});
 vim.keymap.set("n", "th", ":bfirst<enter>", {noremap=false});
 vim.keymap.set("n", "tl", ":blast<enter>", {noremap=false});
 vim.keymap.set("n", "B", "^", {silent=true, noremap=true});
+vim.keymap.set("n", "E", "$", {silent=true, noremap=true});
 
 -- Swap between projects ... opens git projects as tmux sessions
 -- https://github.com/jrmoulton/tmux-sessionizer
