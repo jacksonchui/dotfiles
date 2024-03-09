@@ -1,8 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 DOTFILES_CONFIG_PATH=${JC_DOTFILES:-"$HOME/dotfiles"}/config
 
-eval "$(starship init zsh)"
-
 echo "Using my_rc..."
 
 ## PLATFORM DEPENDENT SETUP ##
@@ -110,7 +108,12 @@ export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/rg
 
+# Tooling init
+eval "$(starship init zsh)"
+
 eval "$(zoxide init --cmd cd zsh)"
+
+. "$HOME/.cargo/env"
 
 ## Obsidian
 export ZET_INBOX_DIR="$HOME/git/obsidian/brain/0-inbox"
