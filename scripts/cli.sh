@@ -21,6 +21,7 @@ install_go_tools() {
 
 init_rust() {
   rustup-init --quiet -y
+  rustup target add wasm32-wasi
   source "$HOME/.cargo/env"
 }
 
