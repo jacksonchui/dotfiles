@@ -22,6 +22,8 @@ install_go_tools() {
 init_rust() {
   rustup-init --quiet -y
   rustup target add wasm32-wasi
+  # Use compiler plugin manager to install copy of rust-src for rust-analyzer
+  rustup component add rust-src
   source "$HOME/.cargo/env"
 }
 

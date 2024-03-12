@@ -24,6 +24,7 @@ brew "nmap"
 brew "node"
 brew "openjdk@11"
 brew "pyenv"
+brew "pyenv-virtualenv"
 brew "ripgrep"
 brew "rustup-init" # Rust toolchain installer
 brew "starship"

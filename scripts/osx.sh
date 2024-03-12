@@ -26,6 +26,9 @@ setup_osx() {
     defaults write com.apple.dock "minimize-to-application" -bool true
     defaults write com.apple.dock tilesize -float 32
 
+    # Disable airplay (seems as of Sonoma, must manually toggle)
+    defaults write com.apple.controlcenter.plist AirplayRecieverEnabled -bool false
+
     # Disable startup sound
     sudo nvram SystemAudioVolume=%01
 
