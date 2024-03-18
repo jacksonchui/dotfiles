@@ -53,6 +53,7 @@ main() {
   info "################################################################################"
   info "MacOS Apps"
   info "################################################################################"
+  warn "You should already be signed into the App Store to continue"
   wait_input
   install_macApps
   success "Finished install mac apps"
@@ -60,14 +61,19 @@ main() {
   info "################################################################################"
   info "Golang tools"
   info "################################################################################"
-  wait_input
   install_go_tools
   success "Finished installing Golang tools"
 
   info "################################################################################"
+  info "Rust init"
+  info "################################################################################"
+  init_rust
+  success "Finished installing rust (via rustup-init)"
+
+
+  info "################################################################################"
   info "Tmux Plugins"
   info "################################################################################"
-  wait_input
   install_tmux_tpm
   success "Finished installing tmux plugins"
 

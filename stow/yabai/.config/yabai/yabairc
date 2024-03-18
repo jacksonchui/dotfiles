@@ -18,4 +18,5 @@ yabai -m rule --add label="Things" app="^Things$" title=".*" manage=off
 yabai -m rule --add label="Vysor" app="^Vysor$" title=".*" manage=off
 yabai -m rule --add label="Music MiniPlayer" app="^Music$" title="^MiniPlayer$" manage=off
 yabai -m rule --add label="Messages" app="^Messages$" title=".*" manage=off
-
+yabai -m rule --add label="New Mail" app="^Mail$" title="^New Message$" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title=".*" manage=off

@@ -99,7 +99,7 @@ require('lazy').setup({
         -- See `:help lualine.txt`
         opts = {
             options = {
-                icons_enabled = false,
+                icons_enabled = true,
                 theme = 'ayu_dark',
                 component_separators = '|',
                 section_separators = '',
@@ -107,7 +107,7 @@ require('lazy').setup({
             sections = {
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 -- Customize the name to show file status + ~/path/to/file
-                lualine_c = { { 'filename', file_status = true, path = 3 } },
+                -- lualine_c = { { 'filename', file_status = true, path = 3 } },
             },
         },
     },

@@ -19,6 +19,18 @@ install_go_tools() {
 	done
 }
 
+init_rust() {
+  rustup-init --quiet -y
+  rustup target add wasm32-wasi
+  # Use compiler plugin manager to install copy of rust-src for rust-analyzer
+  rustup component add rust-src
+  source "$HOME/.cargo/env"
+}
+
 setup_fzf_completion() {
-  /opt/homebrew/opt/fzf/install --no-fish --completion
+  /opt/homebrew/opt/fzf/install \
+    --no-fish \
+    --key-bindings \
+    --completion \
+    --no-update-rc
 }
