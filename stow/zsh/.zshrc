@@ -124,6 +124,9 @@ eval "$(zoxide init --cmd cd zsh)"
 . "$HOME/.cargo/env"
 
 ## Obsidian
-export ZET_INBOX_DIR="$HOME/git/obsidian/brain/0-inbox"
+export ZET_INBOX_DIR="$HOME/git/obsidian/brain/\$in"
 export PATH="$PATH:$HOME/dotfiles/scripts"
+
+## This is the default (with ctrl-a, ctrl-e), but was getting overriden somewhere...
+bindkey -e
 
