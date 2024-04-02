@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 config.color_scheme = 'Material Palenight (base16)'
 config.window_background_opacity = 0.69
 config.macos_window_background_blur = 84
-config.font = wezterm.font 'Hack Nerd Font Mono'
+config.font = wezterm.font 'SF Mono'
 config.font_size = 14.0
 config.line_height = 1.2
 
