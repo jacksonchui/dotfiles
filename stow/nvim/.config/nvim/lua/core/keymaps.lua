@@ -26,8 +26,17 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- greatest remap ever...keep the old buffer when pasting over
 vim.keymap.set("x", "<leader>p", "\"_dP")
 vim.keymap.set("n", "Q", "<nop>", { desc = 'Dont press Q...just dont' })
-
+vim.keymap.set("n", "QQ", ":qa!<enter>", { desc = 'Force Quit' })
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = 'Control-c or escape to escape buffers lol' })
+vim.keymap.set('i', 'jj', '<Esc>', { desc = 'escape (doesn\'t work in pop ups)' });
+
+-- buffer management
+vim.keymap.set("n", "tk", ":bnext<enter>", {noremap=false});
+vim.keymap.set("n", "tj", ":bprev<enter>", {noremap=false});
+vim.keymap.set("n", "th", ":bfirst<enter>", {noremap=false});
+vim.keymap.set("n", "tl", ":blast<enter>", {noremap=false});
+vim.keymap.set("n", "B", "^", {silent=true, noremap=true});
+vim.keymap.set("n", "E", "$", {silent=true, noremap=true});
 
 -- Swap between projects ... opens git projects as tmux sessions
 -- https://github.com/jrmoulton/tmux-sessionizer
@@ -45,4 +54,3 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- insert mode
-vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Alt escape mode' });

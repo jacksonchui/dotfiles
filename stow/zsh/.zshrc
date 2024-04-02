@@ -1,9 +1,16 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 DOTFILES_CONFIG_PATH=${JC_DOTFILES:-"$HOME/dotfiles"}/config
 
-eval "$(starship init zsh)"
-
 echo "Using my_rc..."
+
+configure_pyenv() {
+    # Requires pyenv-virtualenv, pyenv
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    export PATH="$PYENV_ROOT/shims:${PATH}"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+}
 
 ## PLATFORM DEPENDENT SETUP ##
 # 1. Linux Build
@@ -18,10 +25,9 @@ if [[ $UNIX_BASE == "Linux" ]]; then
 elif [[ $UNIX_BASE == "Darwin" ]]; then 
     echo "Applying Darwin-specific config"
     # Pyenv
-    export PYENV_ROOT="$HOME/.pyenv"
-    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-    # eval "$(pyenv virtualenv-init -)"
+    configure_pyenv
 fi
+
 
 # Source the home configs
 . $HOME/.config/me/.me.rc
@@ -110,5 +116,17 @@ export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/rg
 
+# Tooling init
+eval "$(starship init zsh)"
+
 eval "$(zoxide init --cmd cd zsh)"
+
+. "$HOME/.cargo/env"
+
+## Obsidian
+export ZET_INBOX_DIR="$HOME/git/obsidian/brain/\$\$in"
+export PATH="$PATH:$HOME/dotfiles/scripts"
+
+## This is the default (with ctrl-a, ctrl-e), but was getting overriden somewhere...
+bindkey -e
 

@@ -63,6 +63,7 @@ local servers = {
             completion = { callSnippet = "Replace" },
         },
     },
+    rust_analyzer = {},
 }
 
 -- Setup neovim lua configuration, completions for Neovim's Lua API

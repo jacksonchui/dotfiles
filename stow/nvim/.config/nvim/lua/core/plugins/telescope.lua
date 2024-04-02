@@ -28,14 +28,13 @@ end
 M.find_files = function()
   tb.find_files {
     -- Get the list of arguments passed to Neovim
-    find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden', M.GetOpenedDirectory()},
+    find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden'},
     previewer = false
   }
 end
 
 M.live_grep = function()
   tb.live_grep {
-    cwd = M.GetOpenedDirectory(),
     disable_coordinates = true,
     previewer = false
   }

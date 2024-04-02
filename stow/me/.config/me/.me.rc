@@ -20,9 +20,9 @@ if ! echo "$PATH" | grep -q "$MY_SCRIPTS_HOME"; then
 fi
 
 ## TMUX ##
-SESSION_TAG="focus"
+SESSION_TAG="mux1"
 function setup_env() {
-  # Check if the "focus" session already exists
+  # Check if the "mux2" session already exists
   if tmux has-session -t $SESSION_TAG; then
       # If the session exists, attach to it
       tmux attach-session -t $SESSION_TAG
@@ -30,4 +30,9 @@ function setup_env() {
       # If the session doesn't exist, create and attach to it
       tmux new-session -s $SESSION_TAG
   fi
+}
+
+## NVIM
+function notes() {
+  nvim -c ":set wrap" -c ":ZenMode" -c ":ObsidianSearch"
 }
