@@ -11,14 +11,15 @@ brew "coreutils"
 brew "fzf", args: ["HEAD"]
 brew "gawk"
 brew "git"
-brew "python@3.12"
-brew "htop"
-brew "jq"
+brew "python3"
+brew "htop" # Monitor system
+brew "jq" # Parse JSON from CLI, for yabai
 brew "webp"
-brew "lsusb"
+brew "lsusb" # Tell what devices are connected easily
 brew "llvm"
 brew "mas"
 brew "minicom"
+brew "mutt"
 brew "neovim"
 brew "nmap"
 brew "node"
