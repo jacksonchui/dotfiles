@@ -10,20 +10,17 @@ require('telescope').setup {
     },
   },
 }
+pcall(require('telescope').load_extension, 'fzf') -- enable fzf, protected call
 
--- modified version of telescope commands relative to open directory
+-- [M]odified telescope cmds
 local M = {}
+-- See `:help telescope.builtin`
 local tb = require('telescope.builtin')
-
--- Returns passed in directory, if available.
--- Else returns the directory nvim buffer was opened in
-function M.GetOpenedDirectory()
-  local args = vim.fn.argv()
-  if #args > 0 and vim.fn.isdirectory(args[1]) == 1 then
-    return args[1]
-  end
-  return require('telescope.utils').buffer_dir()
+-- noremap true ensures recursion won't trigger
+local function normal_leader_map(key, func, desc)
+  vim.keymap.set('n', '<leader>' .. key, func, { desc = desc, noremap=true })
 end
+
 
 M.find_files = function()
   tb.find_files {
@@ -50,29 +47,33 @@ M.find_config_files = function()
   }
 end
 
--- Enable telescope fzf native, if installed (protected call)
-pcall(require('telescope').load_extension, 'fzf')
-
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
+normal_leader_map('/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
     previewer = false,
   })
-end, { desc = '[/] Fuzzily search in current buffer' })
+end, '[/] Fuzzily search in current buffer')
 
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', M.find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sc', M.find_config_files, { desc = '[S]earch [C]onfig files for docs' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord under cursor' })
-vim.keymap.set('n', '<leader>sg', M.live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
-vim.keymap.set("n", "<leader>z", "<cmd>Telescope undo<cr>", {desc = "Is ctrl-z"})
-vim.keymap.set("n", "<leader>u", function() require("telescope").extensions.undo.undo({ side_by_side = true }) end, {desc = "Show [u]ndo tree"})
+-- SEARCH
+normal_leader_map('sd', tb.diagnostics, '[S]earch [D]iagnostics')
+normal_leader_map('sh', tb.help_tags, '[S]earch [H]elp')
+normal_leader_map('sk', function() tb.keymaps({ modes= {"n", "i"}}) end, '[S]earch [K]eymaps')
+normal_leader_map('sv', tb.git_files, "[S]earch [V]ersion Control/Git")
+normal_leader_map('sw', tb.grep_string, '[S]earch current [W]ord under cursor')
+normal_leader_map('s<tab>', tb.commands, '[S]earch Commands (tab complete)')
 
-vim.api.nvim_set_keymap("n", "<Leader><tab>", "<Cmd>lua require('telescope.builtin').commands()<CR>", {noremap=false})
+-- SEARCH Buffers
+normal_leader_map('?', tb.oldfiles, '[?] Search recently opened files')
+normal_leader_map('<space>', tb.buffers, '[ ] Search existing buffers')
+
+-- Custom Commands within 'M' Module
+normal_leader_map('sc', M.find_config_files, '[S]earch my [C]onfig')
+normal_leader_map('sf', M.find_files, '[S]earch [F]iles')
+normal_leader_map('sg', M.live_grep, '[S]earch by [G]rep')
+
+-- Other mappings
+normal_leader_map('z', require("telescope").extensions.undo.undo, "UNDO: ctrl-z")
+normal_leader_map('u', function() require("telescope").extensions.undo.undo({ side_by_side = true }) end, "Show [u]ndo tree")
+
