@@ -53,4 +53,18 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- Quickfix
+-- Function to run grep and show results in the quickfix list
+-- Use "cdo s/<word>/<sub>/gc | update" in quickfix list to go through changes
+--- @param dir string
+local function grep_to_quickfix(dir)
+    local input = vim.fn.input("Ripgrep > ")
+    if input ~= "" then
+        vim.cmd('Rg' .. vim.fn.shellescape(input) .. dir)
+        vim.cmd('cwindow')
+    end
+end
+vim.keymap.set('n', '<leader>rp', function() grep_to_quickfix(' *') end, {desc = "Rg PROJ to quickfix list"})
+vim.keymap.set('n', '<leader>rf', function() grep_to_quickfix(' %') end, {desc = "Rg FILE to quickfix list"})
+
 -- insert mode

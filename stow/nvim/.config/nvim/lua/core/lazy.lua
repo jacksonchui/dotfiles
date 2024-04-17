@@ -1,5 +1,5 @@
 -- Install package manager
---    https://github.com/folke/lazy.nvim
+--    https://github.com/folke/lazy.vim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -202,4 +202,6 @@ require('lazy').setup({
         },
         build = ':TSUpdate',
     },
+    -- Search with :Rg
+    'duane9/nvim-rg'
 }, {})

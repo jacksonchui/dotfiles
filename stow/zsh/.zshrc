@@ -118,7 +118,6 @@ export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/rg
 
 # Tooling init
 eval "$(starship init zsh)"
-
 eval "$(zoxide init --cmd cd zsh)"
 
 . "$HOME/.cargo/env"

@@ -91,6 +91,11 @@ mason_lspconfig.setup_handlers {
     end,
 }
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "c",
+  command = "setlocal ts=4 sw=4 et",
+})
+
 local home = os.getenv("HOME") or os.getenv("USERPROFILE")
 
 -- https://github.com/williamboman/nvim-lsp-installer/discussions/781
