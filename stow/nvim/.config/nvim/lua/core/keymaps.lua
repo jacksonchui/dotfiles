@@ -64,7 +64,7 @@ local function grep_to_quickfix(dir)
         vim.cmd('cwindow')
     end
 end
-vim.keymap.set('n', '<leader>rp', function() grep_to_quickfix(' *') end, {desc = "Rg PROJ to quickfix list"})
-vim.keymap.set('n', '<leader>rf', function() grep_to_quickfix(' %') end, {desc = "Rg FILE to quickfix list"})
+vim.keymap.set('n', '<leader>pf', function() grep_to_quickfix(' *') end, {desc = "Rg PROJ to quickfix list"})
+vim.keymap.set('n', '<leader>ff', function() grep_to_quickfix(' %') end, {desc = "Rg FILE to quickfix list"})
 
 -- insert mode

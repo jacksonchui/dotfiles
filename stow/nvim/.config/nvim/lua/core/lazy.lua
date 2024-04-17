@@ -23,6 +23,7 @@ require('lazy').setup({
     -- 'tpope/vim-rhubarb', -- GH Enterprise, Issues linking...
     'tpope/vim-fugitive',                          -- :Git
     'tpope/vim-sleuth',                            -- TODO: tabstop + shiftwidth
+    'tpope/vim-unimpaired',
     'theprimeagen/harpoon',                        -- buffer store
     {
         'folke/zen-mode.nvim',                     -- focus mode
