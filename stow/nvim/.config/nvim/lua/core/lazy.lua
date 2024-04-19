@@ -1,5 +1,5 @@
 -- Install package manager
---    https://github.com/folke/lazy.vim
+--    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -204,5 +204,27 @@ require('lazy').setup({
         build = ':TSUpdate',
     },
     -- Search with :Rg
-    'duane9/nvim-rg'
+    'duane9/nvim-rg',
+    {
+        -- better folds
+        'kevinhwang91/nvim-ufo',
+        dependencies = {
+            'kevinhwang91/promise-async',
+            {
+                "luukvbaal/statuscol.nvim",
+                config = function()
+                  local builtin = require("statuscol.builtin")
+                  require("statuscol").setup({
+                    relculright = true,
+                    segments = {
+                      { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+                      { text = { "%s" }, click = "v:lua.ScSa" },
+                      { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+                    },
+                  })
+                end,
+            },
+        },
+        event = "BufReadPost",
+    },
 }, {})

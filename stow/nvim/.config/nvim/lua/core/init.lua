@@ -13,6 +13,7 @@ require('core.plugins.nvim-cmp')          -- autocomplete
 require('core.plugins.obsidian')          -- obsidian
 require('core.plugins.treesitter')        -- nav file faster
 require('core.plugins.telescope')         -- fuzzy searching
+require('core.plugins.ufo')               -- ufo folding
 require('core.plugins.zenmode')           -- zenmode
 
 -- [[ Highlight on yank ]]
