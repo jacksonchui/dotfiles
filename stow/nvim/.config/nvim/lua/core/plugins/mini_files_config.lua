@@ -52,7 +52,16 @@ require('mini.files').setup({
 
 -- toggle minifiles between dir for current buff and closing
 local minifiles_toggle = function(...)
-    if not MiniFiles.close() then MiniFiles.open(vim.api.nvim_buf_get_name(0)) end
+    local buffer_name = vim.api.nvim_buf_get_name(0)
+    if buffer_name ~= 0 and vim.bo.buftype == "" then
+      if not MiniFiles.close() then
+        MiniFiles.open(buffer_name)
+      else
+        vim.api.nvim_echo({{"MiniFiles already open"}}, false, {})
+      end
+    else
+        vim.api.nvim_echo({{"Cannot open minifiles for: " .. vim.bo.buftype}}, false, {})
+      end
   end
 
 vim.keymap.set('n', '<leader>pv', minifiles_toggle, { desc = '[p]re[v]iew my filetree' })

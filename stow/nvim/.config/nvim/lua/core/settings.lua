@@ -8,6 +8,9 @@ vim.g.maplocalleader = ' '
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- Disable intro message
+vim.o.shortmess = 'I'
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
