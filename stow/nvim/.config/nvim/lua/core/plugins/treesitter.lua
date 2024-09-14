@@ -8,6 +8,7 @@ require('nvim-treesitter.configs').setup {
     'tsx', 'typescript',
     'vimdoc', 'vim',
     "markdown", "markdown_inline",
+    "bash", "regex",
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)

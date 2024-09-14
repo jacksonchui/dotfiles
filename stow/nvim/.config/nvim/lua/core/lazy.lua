@@ -22,9 +22,9 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
     -- 'tpope/vim-rhubarb', -- GH Enterprise, Issues linking...
-    'tpope/vim-fugitive',                          -- :Git
-    'tpope/vim-sleuth',                            -- TODO: tabstop + shiftwidth
-    'tpope/vim-unimpaired',
+    { 'tpope/vim-fugitive',   lazy = true, },      -- :Git
+    { 'tpope/vim-sleuth',     lazy = true, },      -- TODO: tabstop + shiftwidth
+    { 'tpope/vim-unimpaired', lazy = true, },
     'theprimeagen/harpoon',                        -- buffer store
     {
         'folke/zen-mode.nvim',                     -- focus mode
@@ -52,6 +52,7 @@ require('lazy').setup({
             { 'folke/neodev.nvim',       opts = {} },                 -- lua configs for nvim...cleans up linting errors
             { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} }, -- LSP status updates
         },
+        lazy = true,
     },
     {   -- TODO: Autocomplete
         'hrsh7th/nvim-cmp',
@@ -62,6 +63,7 @@ require('lazy').setup({
             'hrsh7th/cmp-nvim-lsp',         -- LSP completion
             'rafamadriz/friendly-snippets', -- user-friendly snippets
         },
+        lazy = true,
     },
 
     { 'folke/which-key.nvim',   opts = {} }, -- Keypress previews...
@@ -228,6 +230,7 @@ require('lazy').setup({
             },
         },
         event = "BufReadPost",
+        lazy = true,
     },
     {
       "folke/noice.nvim",
@@ -238,10 +241,8 @@ require('lazy').setup({
       dependencies = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
-        -- OPTIONAL:
-        --   `nvim-notify` is only needed, if you want to use the notification view.
-        --   If not available, we use `mini` as the fallback
+        -- OPTIONAL: notification view
         "rcarriga/nvim-notify",
-        }
-    }
+      }
+    },
 }, {})

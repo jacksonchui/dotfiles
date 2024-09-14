@@ -19,8 +19,8 @@ require("noice").setup({
 })
 
 require("notify").setup({
-  max_width = 50,
-  render = "wrapped-compact",
+  max_width = 100,
+  render = "default",
   stages = "static",
-  timeout = 1000,
+  timeout = 3000,
 })
