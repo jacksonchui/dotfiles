@@ -2,7 +2,10 @@
 [user]
 	name = Jackson Chui
 	email = 14085209+jacksonchui@users.noreply.github.com
+	signingkey = /Users/jacksonchui/.ssh/keys/id_ed25519
 [alias]
   amendne = commit --amend --no-edit
 [core]
 	editor = nvim
+[gpg]
+	format = ssh

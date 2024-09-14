@@ -181,6 +181,7 @@ require('lazy').setup({
             })
             require("telescope").load_extension("undo")
         end,
+        lazy = true,
     },
 
     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
