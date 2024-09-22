@@ -3,6 +3,9 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+# configuring git is a chore
+stow/ssh/.ssh
+
 # Brew lock
 config/Brewfile.lock.json
 
