@@ -124,7 +124,7 @@ eval "$(zoxide init --cmd cd zsh)"
 
 ## Obsidian
 export ZET_INBOX_DIR="$HOME/git/obsidian/brain/\$\$in"
-export PATH="$PATH:$HOME/dotfiles/scripts"
+export PATH="$HOME/dotfiles/scripts:$PATH"
 
 ## This is the default (with ctrl-a, ctrl-e), but was getting overriden somewhere...
 bindkey -e
