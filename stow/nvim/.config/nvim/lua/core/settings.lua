@@ -50,11 +50,20 @@ vim.o.termguicolors = true
 -- Set my column indicator to 80
 vim.opt.colorcolumn = { 80 }
 
--- defaults
---vim.opt.tabstop = 4
---vim.opt.softtabstop = 4
---vim.opt.shiftwidth = 4
+-- Set a fallback (default) for 4-space tabs for all file types
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+
+-- Create autocmds to override settings for specific file types
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"c"}, -- Adjust this pattern for C files
+    callback = function()
+        vim.opt_local.tabstop = 8      -- Use 8-space tabs for C files
+        vim.opt_local.shiftwidth = 8   -- Set indentation to 8 spaces
+        vim.opt_local.expandtab = false -- Use actual tab characters
+    end
+})
 
 vim.opt.wrap = false
 vim.opt.swapfile = false

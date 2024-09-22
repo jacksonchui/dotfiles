@@ -21,6 +21,6 @@ require("noice").setup({
 require("notify").setup({
   max_width = 100,
   render = "default",
-  stages = "static",
+  stages = "fade",
   timeout = 3000,
 })

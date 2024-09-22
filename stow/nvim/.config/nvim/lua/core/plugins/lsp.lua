@@ -94,6 +94,7 @@ local server_opts_mp = {
         }
     },
     rust_analyzer = {},
+        zls = {},
 }
 
 -- Setup neovim lua configuration, completions for Neovim's Lua API
