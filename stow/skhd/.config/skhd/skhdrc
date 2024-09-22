@@ -31,8 +31,6 @@ shift + alt - t : yabai -m window --toggle float --grid 20:6:1:1:4:18
 
 # maximize a window
 shift + alt - f : yabai -m window --toggle zoom-fullscreen
-
-
 shift + alt - c : yabai -m window --toggle zoom-fullscreen
 
 # balance out tree of windows (resize to occupy same area)
@@ -53,8 +51,8 @@ ctrl + alt - h : yabai -m window --warp west
 ctrl + alt - l : yabai -m window --warp east
 
 # move window to display left and right
-shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
-shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+shift + alt - s : yabai -m window --display prev; yabai -m display --focus prev;
+shift + alt - g : yabai -m window --display next; yabai -m display --focus next;
 
 
 # move window to prev and next space
