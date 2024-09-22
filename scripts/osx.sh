@@ -34,3 +34,5 @@ setup_osx() {
 
     killall Dock 
 }
+
+setup_osx

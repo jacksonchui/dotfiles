@@ -46,3 +46,7 @@ setup_fzf_completion() {
     --completion \
     --no-update-rc
 }
+
+install_go_tools
+init_rust
+setup_fzf_completion

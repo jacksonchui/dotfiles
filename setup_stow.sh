@@ -39,3 +39,5 @@ stow_dotfiles() {
 	info "Stowing: $dotfiles"
 	stow -d stow --verbose 1 --target $HOME $dotfiles
 }
+
+stow_dotfiles

@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#! /usr/bin/env sh
 
 . $HOME/dotfiles/scripts/utils.sh
 
@@ -21,3 +21,5 @@ install_homebrew() {
         fi
     )
 }
+
+install_homebrew

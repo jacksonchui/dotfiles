@@ -33,3 +33,4 @@ install_macApps() {
     fi
 }
 
+install_macApps
