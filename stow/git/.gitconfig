@@ -1,11 +1,14 @@
-# This is Git's per-user configuration file.
-[user]
-	name = Jackson Chui
-	email = 14085209+jacksonchui@users.noreply.github.com
-	signingkey = /Users/jacksonchui/.ssh/keys/id_ed25519
+[credential]
+	helper = osxkeychain
 [alias]
-  amendne = commit --amend --no-edit
-[core]
-	editor = nvim
-[gpg]
-	format = ssh
+    lol = log --oneline --graph --decorate --all
+	ane = commit --amend --no-edit
+    empty = commit --allow-empty
+    config-check = config --list --show-origin --show-scope
+# Include ifs
+[includeIf "gitdir:~/projects/work/**/"]
+    path = ~/.work.gitconfig
+[includeIf "gitdir:~/projects/personal/**/"]
+    path = ~/.personal.gitconfig
+[includeIf "gitdir:~/dotfiles/"]
+    path = ~/.personal.gitconfig

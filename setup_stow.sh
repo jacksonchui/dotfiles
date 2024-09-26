@@ -5,6 +5,7 @@
 stow_dotfiles() {
 	files=( \
 	  ".gitconfig"
+	  ".personal.gitconfig"
 	  ".ssh/config"
 	  ".tmux.conf"
 	  ".wezterm.lua"
