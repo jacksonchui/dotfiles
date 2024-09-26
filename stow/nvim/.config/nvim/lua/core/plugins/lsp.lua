@@ -94,11 +94,20 @@ local server_opts_mp = {
         }
     },
     rust_analyzer = {},
-        zls = {},
+    zls = {},
 }
 
--- Setup neovim lua configuration, completions for Neovim's Lua API
--- require('neodev').setup()
+-- sourcekit comes bundled with the swift toolchain, so install separately
+local lspconfig = require('lspconfig')
+lspconfig.sourcekit.setup({
+    capabilities = {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+        },
+    },
+})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -128,9 +137,4 @@ mason_lspconfig.setup_handlers {
         require('lspconfig')[server].setup(opts)
     end,
 }
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "c",
-  command = "setlocal ts=4 sw=4 et",
-})
 

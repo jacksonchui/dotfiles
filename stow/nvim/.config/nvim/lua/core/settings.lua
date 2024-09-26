@@ -50,6 +50,8 @@ vim.o.termguicolors = true
 -- Set my column indicator to 80
 vim.opt.colorcolumn = { 80 }
 
+-- MARK: TABS
+
 -- Set a fallback (default) for 4-space tabs for all file types
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
