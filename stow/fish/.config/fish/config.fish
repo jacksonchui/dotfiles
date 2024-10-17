@@ -24,33 +24,58 @@ set -gx HOMEBREW_NO_INSTALL_CLEANUP TRUE
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # PATH
-set -gx PATH $GOBIN $PATH
-set -gx PATH $HOME/.local/bin $PATH
-set -gx PATH /usr/local/sbin $PATH
 set -gx PATH /usr/local/opt/ruby/bin:$HOME/.gem/ruby/2.7.0/bin $PATH
 set -gx PATH $PATH $HOME/dotfiles/scripts
 
-# ALIASES
+# ALIASES (hard sets with no expansion)
+alias ls="lsd"
+alias cd="z"
+
+# ABBREVIATIONS
 abbr grep 'grep --color=auto'
 abbr fgrep 'fgrep --color=auto'
 abbr egrep 'egrep --color=auto'
-abbr ls 'lsd'
 abbr ll 'ls -alFh'
 abbr la 'ls -A'
 abbr reload-profile "source ~/.zshrc"
-abbr gitlog "git log --oneline --graph"
 abbr ftgz "tar --use-compress-program=pigz -zcvf"
-abbr refresh-tmux "eval \$(tmux showenv -s | grep -E '^(SSH|DISPLAY)')"
+abbr reload-tmux "eval \$(tmux showenv -s | grep -E '^(SSH|DISPLAY)')"
+
+## Pretty git print in fish
+set HASH "%C(always,yellow)%h%C(always,reset)"
+set RELATIVE_TIME "%C(always,green)%ar%C(always,reset)"
+set AUTHOR "%C(always,bold blue)%an%C(always,reset)"
+set REFS "%C(always,red)%d%C(always,reset)"
+set SUBJECT "%s"
+
+set FORMAT "$HASH $RELATIVE_TIME{$AUTHOR{$REFS $SUBJECT"
+
+function pretty_git_log
+    git log --graph --pretty="tformat:$FORMAT" $argv |
+    column -t -s '{' |
+    less -XRS --quit-if-one-screen
+end
+
+## For git
+abbr gst "git status"
+abbr gc "git commit"
+abbr co "git checkout"
+abbr gaa "git add -A"
+abbr gd "git diff"
+abbr gdc "git diff --cached"
+abbr gl pretty_git_log
+
 
 # Check and install fisher
 if type -q fisher
+    fisher --version
+else
     echo "Fisher is not installed. Installing..."
-    source (curl -sL https://git.io/fisher | psub)
-    fisher install jethrokuan/fisher
+    # this is maintained under ~/.config/fish/fish_plugins
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+    fisher install jorgebucaran/fisher
     fisher install PatrickF1/fzf.fish
     fisher install edc/bass
-else
-    # echo "Fisher is already installed."
 end
 
 # Enable starship
