@@ -19,3 +19,4 @@ install_tmux_tpm() {
   fi
 }
 
+install_tmux_tpm

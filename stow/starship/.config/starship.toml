@@ -1,6 +1,8 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Help: https://starship.rs/config/
+
 # Inserts a blank line between shell prompts
 add_newline = false
 
@@ -9,6 +11,21 @@ format = """$directory$character"""
 palette = "catppuccin_mocha"
 # rest of prompt on right
 right_format = """$all"""
+
+[directory]
+truncation_symbol = "…/"
+truncate_to_repo = true
+
+[cmd_duration]
+min_time = 3_000
+show_milliseconds = true
+style = "bold yellow"
+# if a command takes too long, show notification
+#show_notifications = true
+min_time_to_notify = 10_000
+
+[sudo]
+disabled = false
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'

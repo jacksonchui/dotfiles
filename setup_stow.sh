@@ -5,6 +5,7 @@
 stow_dotfiles() {
 	files=( \
 	  ".gitconfig"
+	  ".personal.gitconfig"
 	  ".ssh/config"
 	  ".tmux.conf"
 	  ".wezterm.lua"
@@ -20,6 +21,7 @@ stow_dotfiles() {
 	  ".config/yabai"
 	  ".config/me"
 	  ".config/starship"
+      ".config/fish"
 	)
 
 	warn "Removing existing config files"
@@ -33,9 +35,11 @@ stow_dotfiles() {
 	done
 
 	# name of the folder...
-	dotfiles="git me nvim ripgrep skhd ssh starship tmux yabai wezterm zsh"
+	dotfiles="git me nvim fish ripgrep skhd ssh starship tmux yabai wezterm zsh"
 
 
 	info "Stowing: $dotfiles"
 	stow -d stow --verbose 1 --target $HOME $dotfiles
 }
+
+stow_dotfiles

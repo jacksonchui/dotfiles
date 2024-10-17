@@ -8,7 +8,8 @@ if not vim.loop.fs_stat(lazypath) then
         'clone',
         '--filter=blob:none',
         'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release lazypath,
+        '--branch=stable', -- latest stable release
+	lazypath
     }
 end
 
@@ -21,8 +22,9 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
     -- 'tpope/vim-rhubarb', -- GH Enterprise, Issues linking...
-    'tpope/vim-fugitive',                          -- :Git
-    'tpope/vim-sleuth',                            -- TODO: tabstop + shiftwidth
+    { 'tpope/vim-fugitive',   lazy = true, },      -- :Git
+    { 'tpope/vim-sleuth',     lazy = true, },      -- TODO: tabstop + shiftwidth
+    { 'tpope/vim-unimpaired', lazy = true, },
     'theprimeagen/harpoon',                        -- buffer store
     {
         'folke/zen-mode.nvim',                     -- focus mode
@@ -50,6 +52,7 @@ require('lazy').setup({
             { 'folke/neodev.nvim',       opts = {} },                 -- lua configs for nvim...cleans up linting errors
             { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} }, -- LSP status updates
         },
+        lazy = true,
     },
     {   -- TODO: Autocomplete
         'hrsh7th/nvim-cmp',
@@ -60,6 +63,7 @@ require('lazy').setup({
             'hrsh7th/cmp-nvim-lsp',         -- LSP completion
             'rafamadriz/friendly-snippets', -- user-friendly snippets
         },
+        lazy = true,
     },
 
     { 'folke/which-key.nvim',   opts = {} }, -- Keypress previews...
@@ -179,6 +183,7 @@ require('lazy').setup({
             })
             require("telescope").load_extension("undo")
         end,
+        lazy = true,
     },
 
     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -202,4 +207,58 @@ require('lazy').setup({
         },
         build = ':TSUpdate',
     },
+    -- Search with :Rg
+    'duane9/nvim-rg',
+    {
+        -- better folds
+        'kevinhwang91/nvim-ufo',
+        dependencies = {
+            'kevinhwang91/promise-async',
+            {
+                "luukvbaal/statuscol.nvim",
+                config = function()
+                  local builtin = require("statuscol.builtin")
+                  require("statuscol").setup({
+                    relculright = true,
+                    segments = {
+                      { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+                      { text = { "%s" }, click = "v:lua.ScSa" },
+                      { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+                    },
+                  })
+                end,
+            },
+        },
+        event = "BufReadPost",
+        lazy = true,
+    },
+    {
+      "folke/noice.nvim",
+      event = "VeryLazy",
+      opts = {
+        -- add any options here
+      },
+      dependencies = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL: notification view
+        "rcarriga/nvim-notify",
+      }
+    },
+    {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && yarn install",
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
+    },
+    -- {
+    --     'MeanderingProgrammer/render-markdown.nvim',
+    --     opts = {},
+    --     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    -- },
 }, {})

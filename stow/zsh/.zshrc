@@ -118,14 +118,13 @@ export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/rg
 
 # Tooling init
 eval "$(starship init zsh)"
-
 eval "$(zoxide init --cmd cd zsh)"
 
 . "$HOME/.cargo/env"
 
 ## Obsidian
 export ZET_INBOX_DIR="$HOME/git/obsidian/brain/\$\$in"
-export PATH="$PATH:$HOME/dotfiles/scripts"
+export PATH="$HOME/dotfiles/scripts:$PATH"
 
 ## This is the default (with ctrl-a, ctrl-e), but was getting overriden somewhere...
 bindkey -e

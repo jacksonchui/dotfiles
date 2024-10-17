@@ -5,7 +5,7 @@
 --hidden
 --follow
 --no-heading
---max-columns=150
+--max-columns=0
 --max-columns-preview
 --colors=line:none
 --colors=path:fg:62
