@@ -1,14 +1,20 @@
-#config.fish is meant for interactive mode only
-if not status is-interactive
-    exit
-end
+# NOTE: Always source these since our default shell is fish
+
+# env var for programs
+set -gx GOBIN                   $HOME/go/bin
+
+# PATH
+set -gx PATH $GOBIN $PATH
+set -gx PATH $HOME/.local/bin $PATH
+set -gx PATH /usr/local/sbin $PATH
+
+if status is-interactive
 
 # -- ShellCheck --
 
 # ENV Vars
 set -gx VISUAL                  nvim
 set -gx EDITOR                  $VISUAL
-set -gx GOBIN                   $HOME/go/bin
 set -gx FISH_CONFIG_PATH        $HOME/.config/fish
 set -gx RIPGREP_CONFIG_PATH     $HOME/.config/ripgrep/rg
 set -gx DOTFILES_CONFIG_PATH    $HOME/dotfiles/config
@@ -99,3 +105,5 @@ end
 # storing in a temp variable.
 
 # `set -gx` sets an env var as global and passes it into subshells
+
+end # match not interactive else
