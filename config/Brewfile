@@ -47,7 +47,7 @@ cask "raycast"
 cask "rectangle"
 cask "steermouse"
 cask "vlc"
-cask "wezterm"
+cask "ghostty"
 cask "zed"
 mas "Bitwarden", id: 1352778147
 mas "Monodraw", id: 920404675
