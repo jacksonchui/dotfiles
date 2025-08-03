@@ -25,6 +25,7 @@ require('lazy').setup({
     { 'tpope/vim-fugitive',   lazy = true, },      -- :Git
     { 'tpope/vim-sleuth',     lazy = true, },      -- TODO: tabstop + shiftwidth
     { 'tpope/vim-unimpaired', lazy = true, },
+    { 'ahmedkhalf/project.nvim', },
     'theprimeagen/harpoon',                        -- buffer store
     {
         'folke/zen-mode.nvim',                     -- focus mode
@@ -153,6 +154,7 @@ require('lazy').setup({
 
             hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
         end,
+        lazy = true,
     },
 
     -- "gc" to comment visual regions/lines

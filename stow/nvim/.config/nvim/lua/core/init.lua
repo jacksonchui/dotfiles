@@ -17,6 +17,9 @@ require('core.plugins.telescope')         -- fuzzy searching
 require('core.plugins.ufo')               -- ufo folding
 require('core.plugins.zenmode')           -- zenmode
 
+-- TEMP ... trying out installs
+require('project_nvim').setup()
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

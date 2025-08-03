@@ -17,7 +17,7 @@ require('fff').setup({
     title = 'FFF Files',  -- Window title
     max_results = 60,     -- Maximum search results to display
     max_threads = 4,      -- Maximum threads for fuzzy search
-  
+
     keymaps = {
       close = '<C-c>',
       select = '<CR>',
@@ -30,7 +30,7 @@ require('fff').setup({
       preview_scroll_up = '<C-u>',
       preview_scroll_down = '<C-d>',
     },
-  
+
     -- Highlight groups
     hl = {
       border = 'FloatBorder',
@@ -43,7 +43,7 @@ require('fff').setup({
       frecency = 'Number',
       debug = 'Comment',
     },
-  
+
     -- Debug options
     debug = {
       show_scores = false,  -- Toggle with F2 or :FFFDebug

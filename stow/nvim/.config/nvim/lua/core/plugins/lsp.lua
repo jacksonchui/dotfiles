@@ -2,7 +2,7 @@
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(_, buffer)
     -- NOTE: Remember that lua is a real programming language, and as such it is possible
     -- to define small helper and utility functions so you don't have to repeat yourself
     -- many times.
@@ -14,7 +14,7 @@ local on_attach = function(_, bufnr)
             desc = 'LSP: ' .. desc
         end
 
-        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        vim.keymap.set('n', keys, func, { buffer = buffer, desc = desc })
     end
 
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -40,7 +40,7 @@ local on_attach = function(_, bufnr)
     end, '[W]orkspace [L]ist Folders')
 
     -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.api.nvim_buf_create_user_command(buffer, 'Format', function(_)
         vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
 end
@@ -53,14 +53,28 @@ local home = os.getenv("HOME") or os.getenv("USERPROFILE")
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+require("neodev").setup()
+
 -- migrate to v2.0.0 code away from recursive table
 vim.lsp.config('lua_ls', {
     Lua = {
-        diagnostics = { globals = { "vim " }, },
-        workspace = { checkThirdParty = false },
+        diagnostics = { globals = { 'vim', 'require' }, },
+        workspace = {
+            library = {
+                vim.env.VIMRUNTIME,  -- Neovim's runtime files
+            },
+            checkThirdParty = false
+        },
         telemetry = { enable = false },
         completion = { callSnippet = "Replace" },
+        checkThirdParty = false, -- disable prompts to configure 3rd-party libraries
     },
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 vim.lsp.config('clangd', {
@@ -79,6 +93,8 @@ vim.lsp.config('clangd', {
             "-j=4",                         -- num of workers
     },
     filetypes = { "c", "cpp", "objc" },
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 -- NOTE: Using defaults for the rest of the servers.
@@ -95,9 +111,6 @@ lspconfig.sourcekit.setup({
     },
 })
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- NOTE: Go to `:Mason` to further configure installed servers
 require("mason").setup()
@@ -106,7 +119,7 @@ require("mason-lspconfig").setup {
         'fish_lsp',
         'clangd',
         'lua_ls',
-        'pyright', 
-        'zls', 
+        'pyright',
+        'zls',
     }
 }
