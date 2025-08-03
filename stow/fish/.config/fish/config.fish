@@ -97,13 +97,6 @@ else
     echo "fzf is not installed."
 end
 
-# Initialize pyenv
-set -gx PYENV_ROOT "$HOME/.pyenv"
-set -gx PATH "$PYENV_ROOT/bin" $PATH
-set -gx PYENV_VERSION '3.12'
-source (pyenv init - | psub)
-source (pyenv virtualenv-init - | psub)
-
 # Configure tmux multiplexer
 set SESSION_TAG "tmux1"
 function setup_env

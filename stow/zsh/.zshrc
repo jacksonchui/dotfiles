@@ -3,15 +3,6 @@ DOTFILES_CONFIG_PATH=${JC_DOTFILES:-"$HOME/dotfiles"}/config
 
 echo "Using my_rc..."
 
-configure_pyenv() {
-    # Requires pyenv-virtualenv, pyenv
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    export PATH="$PYENV_ROOT/shims:${PATH}"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-}
-
 ## PLATFORM DEPENDENT SETUP ##
 # 1. Linux Build
 UNIX_BASE=$(uname)
@@ -24,8 +15,6 @@ if [[ $UNIX_BASE == "Linux" ]]; then
     echo $PATH
 elif [[ $UNIX_BASE == "Darwin" ]]; then 
     echo "Applying Darwin-specific config"
-    # Pyenv
-    configure_pyenv
 fi
 
 
