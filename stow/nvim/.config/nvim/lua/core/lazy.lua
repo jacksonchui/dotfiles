@@ -156,43 +156,29 @@ require('lazy').setup({
     },
 
     -- "gc" to comment visual regions/lines
-    -- { 'numToStr/Comment.nvim', opts = {} },
-
-    -- Fuzzy Finder (files, lsp, etc)
+    { 'numToStr/Comment.nvim', opts = {} },
     {
-        'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
+        "dmtrKovalenko/fff.nvim",
         dependencies = {
-            'nvim-lua/plenary.nvim',         -- async, lua functions
-            'debugloop/telescope-undo.nvim', -- show undo history
+            "nvim-tree/nvim-web-devicons",
         },
-        config = function()
-            require("telescope").setup({
-                -- the rest of your telescope config goes here
-                extensions = {
-                    undo = {
-                        -- telescope-undo.nvim config, see below
-                    },
-                },
-            })
-            require("telescope").load_extension("undo")
-        end,
-        lazy = true,
+        -- must build with nightly for neo-frizbee
+        build = "rustup run nightly cargo build --release",
+        -- or if you are using nixos
+        -- build = "nix run .#release",
+        opts = {
+            -- pass here all the options
+        },
+        keys = {
+            {
+            "ff", -- try it if you didn't it is a banger keybinding for a picker
+            function()
+                require("fff").find_files()
+            end,
+            desc = "FFFind FFFiles",
+            },
+        },
     },
-
-    -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-    -- Only load if `make` is available. Make sure you have the system
-    -- requirements installed.
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-            return vim.fn.executable 'make' == 1
-        end,
-    },
-
     {
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',

@@ -110,6 +110,10 @@ function setup_env
     end
 end
 
+# For Cargo for fff
+
+set -gx PATH $HOME/.cargo/bin $PATH
+
 # Work-specific extensions
 if test -f $FISH_CONFIG_PATH/work.fish
     source $FISH_CONFIG_PATH/work.fish

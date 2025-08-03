@@ -7,12 +7,13 @@ require('core.keymaps')
 
 -- plugins
 require('core.plugins.mini_files_config') -- file explorer
-require('core.plugins.harpoon')           -- Fast file switcher (C-a)
+-- require('core.plugins.harpoon')           -- Fast file switcher (C-a)
 require('core.plugins.lsp')               -- lsp
 require('core.plugins.noice')             -- noice (centered cmdline)
 require('core.plugins.nvim-cmp')          -- autocomplete
-require('core.plugins.treesitter')        -- nav file faster
-require('core.plugins.telescope')         -- fuzzy searching
+require('core.plugins.fff')
+-- require('core.plugins.treesitter')        -- nav file faster
+-- require('core.plugins.telescope')         -- fuzzy searching
 require('core.plugins.ufo')               -- ufo folding
 require('core.plugins.zenmode')           -- zenmode
 
