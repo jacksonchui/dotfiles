@@ -7,7 +7,7 @@ require('core.keymaps')
 
 -- plugins
 require('core.plugins.mini_files_config') -- file explorer
--- require('core.plugins.harpoon')           -- Fast file switcher (C-a)
+require('core.plugins.harpoon')           -- Fast file switcher (C-a)
 require('core.plugins.lsp')               -- lsp
 require('core.plugins.noice')             -- noice (centered cmdline)
 require('core.plugins.nvim-cmp')          -- autocomplete

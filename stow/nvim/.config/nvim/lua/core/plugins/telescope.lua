@@ -81,9 +81,11 @@ normal_leader_map('?', tb.oldfiles, '[?] Search recently opened files')
 normal_leader_map('<space>', tb.buffers, '[ ] Search existing buffers')
 
 -- Custom Commands within 'M' Module
-normal_map('cc', M.find_config_files, 'Rg config aka dotfiles')
-normal_map('gg', M.live_grep, 'Ripgrep')
--- search for files using sf from sff
+normal_map('<leader>C', M.find_config_files, 'Ripgrep config aka dotfiles')
+normal_map('<leader>G', M.live_grep, 'Ripgrep')
+-- search for files using ff from `fff`
+
+vim.keymap.set("n", "<leader>gs", require('telescope.builtin').git_status, {desc = "[s]how git [s]tatus"})
 
 -- Other mappings
 normal_leader_map('z', require("telescope").extensions.undo.undo, "UNDO: ctrl-z")

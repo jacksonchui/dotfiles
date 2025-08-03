@@ -23,12 +23,17 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
     -- 'tpope/vim-rhubarb', -- GH Enterprise, Issues linking...
     { 'tpope/vim-fugitive',   lazy = true, },      -- :Git
-    { 'tpope/vim-sleuth',     lazy = true, },      -- TODO: tabstop + shiftwidth
+    { 'tpope/vim-sleuth',                  },      -- tabstop + shiftwidth
     { 'tpope/vim-unimpaired', lazy = true, },
-    { 'ahmedkhalf/project.nvim', },
-    'theprimeagen/harpoon',                        -- buffer store
+    { 'ahmedkhalf/project.nvim',           },
+    {
+        'ThePrimeagen/harpoon',
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },                       -- buffer store
     {
         'folke/zen-mode.nvim',                     -- focus mode
+        cmd = { "ZenMode" },
         dependencies = {
             'folke/twilight.nvim',                 -- highlight current line
         },
@@ -83,80 +88,78 @@ require('lazy').setup({
             end,
         }
     },
-    {
-        -- Theme inspired by Atom
-        'navarasu/onedark.nvim',
+    { 
+        "catppuccin/nvim",
+        name = "catppuccin",
         priority = 1000,
-        config = function()
-            vim.cmd.colorscheme 'onedark'
-        end,
-    },
-
+    }, -- my preferred theme
     {
-        -- Set lualine as statusline
+        -- Lualine statusline
         'nvim-lualine/lualine.nvim',
-        -- See `:help lualine.txt`
+        dependencies = { 'nvim-tree/nvim-web-devicons' }, -- add devicons plugin
         opts = {
             options = {
-                icons_enabled = true,
-                theme = 'ayu_dark',
-                component_separators = '|',
-                section_separators = '',
+            icons_enabled = true,
+            theme = 'catppuccin',
+            component_separators = { left = '', right = '' },
+            section_separators = { left = '', right = '' },
             },
             sections = {
-                lualine_b = { 'branch', 'diff', 'diagnostics' },
-                -- Customize the name to show file status + ~/path/to/file
-                -- lualine_c = { { 'filename', file_status = true, path = 3 } },
+            lualine_b = { 'branch', 'diff', 'diagnostics' },
+            lualine_c = {
+                {
+                'filename',
+                file_status = true,
+                path = 3, -- show full path with ~ for home
+                shorting_target = 100,
+                }
+            },
             },
         },
     },
-
     {
-        -- Add indentation guides even on blank lines
-        'lukas-reineke/indent-blankline.nvim',
-        -- Enable `lukas-reineke/indent-blankline.nvim`
-        -- See `:help ibl`
-        config = function()
-            local highlight = {
-                'RainbowViolet',
-                'RainbowBlue',
-                'RainbowLightYellow',
-                'RainbowLightBlue',
-                'WhiteSpace',
-            }
+      'lukas-reineke/indent-blankline.nvim',
+      main = "ibl",
+      opts = {
+        scope = {
+          highlight = {
+            'RainbowViolet',
+            'RainbowBlue',
+            'RainbowLightYellow',
+            'RainbowLightBlue',
+            'WhiteSpace',
+          },
+        },
+      },
+      config = function()
+        local hooks = require('ibl.hooks')
 
-            local hooks = require('ibl.hooks')
+        -- Enable 'list' to show indent guides
+        vim.opt.list = true
 
-            vim.opt.list = true
-            vim.api.nvim_command([[
-        set listchars=tab:\|\ ,trail:▫
-      ]])
+        -- Set listchars to show indent lines and trailing spaces (adjust as you like)
+        vim.opt.listchars = {
+          tab = '│ ',       -- vertical bar + space for tabs
+          trail = '·',      -- dot for trailing spaces
+          extends = '›',
+          precedes = '‹',
+          nbsp = '␣',
+        }
 
-            -- appends arrow down at end of line
-            -- vim.opt.listchars:append('eol:↴')
+        -- Define highlight groups used for rainbow indent colors
+        hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+          vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#ccccff' })
+          vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61afef' })
+          vim.api.nvim_set_hl(0, 'RainbowLightYellow', { fg = '#dafdba' })
+          vim.api.nvim_set_hl(0, 'RainbowLightBlue', { fg = '#dffbfc' })
+          vim.api.nvim_set_hl(0, 'WhiteSpace', { fg = '#444444' })
+        end)
 
-            -- create the highlight groups in the highlight setup hook, so they are reset
-            -- every time the colorscheme changes
-            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-                vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#ccccff' })
-                vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61afef' })
-                vim.api.nvim_set_hl(0, 'RainbowLightYellow', { fg = '#dafdba' })
-                vim.api.nvim_set_hl(0, 'RainbowLightBlue', { fg = '#dffbfc' })
-            end)
-
-            vim.g.rainbow_delimiters = { highlight = highlight }
-            require('ibl').setup({
-                scope = { highlight = highlight },
-                whitespace = {
-                    remove_blankline_trail = true,
-                },
-            })
-
-            hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-        end,
-        lazy = true,
+        -- Register scope highlight (optional, for scope guides)
+        hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+      end,
+      lazy = true,
     },
-
     -- "gc" to comment visual regions/lines
     -- { 'numToStr/Comment.nvim', opts = {} },
     -- Faster way to navigate through files
@@ -166,10 +169,8 @@ require('lazy').setup({
             'nvim-web-devicons',
         },
         build = "cargo +nightly build --release",
-        -- or if you are using nixos
-        opts = {
-          -- pass here all the options
-        },
+        cond = function() return vim.fn.executable 'cargo' == 1 end,
+        opts = {},
         keys = {
           {
             "ff", -- try it if you didn't it is a banger keybinding for a picker
@@ -180,7 +181,6 @@ require('lazy').setup({
           },
         },
     },
-
     -- Fuzzy Finder (files, lsp, etc)
     {
         'nvim-telescope/telescope.nvim',
@@ -188,14 +188,12 @@ require('lazy').setup({
         dependencies = {
             'nvim-lua/plenary.nvim',         -- async, lua functions
             'debugloop/telescope-undo.nvim', -- show undo history
+            'duane9/nvim-rg',                -- search with rg, not a true dep, but fits here
         },
         config = function()
             require("telescope").setup({
-                -- the rest of your telescope config goes here
                 extensions = {
-                    undo = {
-                        -- telescope-undo.nvim config, see below
-                    },
+                    undo = {}, -- telescope-undo.nvim config, see below
                 },
             })
             require("telescope").load_extension("undo")
@@ -208,24 +206,17 @@ require('lazy').setup({
     -- requirements installed.
     {
         'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
-        cond = function()
-            return vim.fn.executable 'make' == 1
-        end,
+        cond = function() return vim.fn.executable 'make' == 1 end,
     },
-
     {
-        -- Highlight, edit, and navigate code
-        'nvim-treesitter/nvim-treesitter',
+        
+        'nvim-treesitter/nvim-treesitter', -- Highlight, edit, and navigate code
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
         build = ':TSUpdate',
     },
-    -- Search with :Rg
-    'duane9/nvim-rg',
     {
         -- better folds
         'kevinhwang91/nvim-ufo',
@@ -252,14 +243,10 @@ require('lazy').setup({
     {
       "folke/noice.nvim",
       event = "VeryLazy",
-      opts = {
-        -- add any options here
-      },
       dependencies = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
-        -- OPTIONAL: notification view
-        "rcarriga/nvim-notify",
+        "rcarriga/nvim-notify", -- OPTIONAL: notification view
       }
     },
     {
@@ -271,11 +258,4 @@ require('lazy').setup({
       end,
       ft = { "markdown" },
     },
-    -- {
-    --     'MeanderingProgrammer/render-markdown.nvim',
-    --     opts = {},
-    --     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    -- },
 }, {})

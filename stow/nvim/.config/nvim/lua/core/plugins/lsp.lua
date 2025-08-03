@@ -57,21 +57,24 @@ local home = os.getenv("HOME") or os.getenv("USERPROFILE")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require("neodev").setup()
+-- TODO: figure out why neodev doesn't work and it still highlights vim
+require("neodev").setup({})
 
 -- migrate to v2.0.0 code away from recursive table
+
 vim.lsp.config('lua_ls', {
     Lua = {
         diagnostics = { globals = { 'vim', 'require' }, },
         workspace = {
+            checkThirdParty = false,
             library = {
                 vim.env.VIMRUNTIME,  -- Neovim's runtime files
             },
-            checkThirdParty = false
         },
         telemetry = { enable = false },
         completion = { callSnippet = "Replace" },
         checkThirdParty = false, -- disable prompts to configure 3rd-party libraries
+        settings = { Lua = {} },
     },
     on_attach = on_attach,
     capabilities = capabilities,
