@@ -1,5 +1,7 @@
--- NOTE: requires `rustup install nightly` and `rustup override set nightly`
+-- NOTE: requires `rustup install nightly` and `rcargo +nightly build --release`
 --       to use `avx512_target_feature`, `portable_simd`, and `get_mut_unchecked`
+
+-- [FFF]: a command that is a smarter way to search through filenames
 
 require('fff').setup({
     -- UI dimensions and appearance
@@ -17,7 +19,7 @@ require('fff').setup({
     max_threads = 4,      -- Maximum threads for fuzzy search
   
     keymaps = {
-      close = '<Esc>',
+      close = '<C-c>',
       select = '<CR>',
       select_split = '<C-s>',
       select_vsplit = '<C-v>',
@@ -47,5 +49,6 @@ require('fff').setup({
       show_scores = false,  -- Toggle with F2 or :FFFDebug
     },
 })
-  
+
+-- icons for this app
 require('nvim-web-devicons').setup()

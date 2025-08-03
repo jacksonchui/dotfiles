@@ -1,5 +1,7 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+-- telescope is a tool for that leverages treesitter to display data
+
 require('telescope').setup {
   defaults = {
     mappings = {
@@ -19,6 +21,10 @@ local tb = require('telescope.builtin')
 -- noremap true ensures recursion won't trigger
 local function normal_leader_map(key, func, desc)
   vim.keymap.set('n', '<leader>' .. key, func, { desc = desc, noremap=true })
+end
+
+local function normal_map(key, func, desc)
+  vim.keymap.set('n', key, func, { desc = desc, noremap=true })
 end
 
 
@@ -69,9 +75,9 @@ normal_leader_map('?', tb.oldfiles, '[?] Search recently opened files')
 normal_leader_map('<space>', tb.buffers, '[ ] Search existing buffers')
 
 -- Custom Commands within 'M' Module
-normal_leader_map('sc', M.find_config_files, '[S]earch my [C]onfig')
-normal_leader_map('sf', M.find_files, '[S]earch [F]iles')
-normal_leader_map('sg', M.live_grep, '[S]earch by [G]rep')
+normal_map('sc', M.find_config_files, '[S]earch my [C]onfig')
+normal_map('sg', M.live_grep, '[S]earch by [G]rep')
+-- search for files using sf from sff
 
 -- Other mappings
 normal_leader_map('z', require("telescope").extensions.undo.undo, "UNDO: ctrl-z")

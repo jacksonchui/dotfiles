@@ -157,6 +157,27 @@ require('lazy').setup({
 
     -- "gc" to comment visual regions/lines
     -- { 'numToStr/Comment.nvim', opts = {} },
+    -- Faster way to navigate through files
+    {
+        'dmtrKovalenko/fff.nvim',
+        dependencies = {
+            'nvim-web-devicons',
+        },
+        build = "cargo +nightly build --release",
+        -- or if you are using nixos
+        opts = {
+          -- pass here all the options
+        },
+        keys = {
+          {
+            "ff", -- try it if you didn't it is a banger keybinding for a picker
+            function()
+              require("fff").find_files()
+            end,
+            desc = "FFFind FFFiles",
+          },
+        },
+    },
 
     -- Fuzzy Finder (files, lsp, etc)
     {
