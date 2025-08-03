@@ -11,6 +11,12 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    live_grep = {
+      file_ignore_patterns = { 'node_modules', '.git', '.cpcache', '.lsp' },
+      search_dirs = { root_dir },
+    },
+  },
 }
 pcall(require('telescope').load_extension, 'fzf') -- enable fzf, protected call
 
@@ -75,8 +81,8 @@ normal_leader_map('?', tb.oldfiles, '[?] Search recently opened files')
 normal_leader_map('<space>', tb.buffers, '[ ] Search existing buffers')
 
 -- Custom Commands within 'M' Module
-normal_map('sc', M.find_config_files, '[S]earch my [C]onfig')
-normal_map('sg', M.live_grep, '[S]earch by [G]rep')
+normal_map('cc', M.find_config_files, 'Rg config aka dotfiles')
+normal_map('gg', M.live_grep, 'Ripgrep')
 -- search for files using sf from sff
 
 -- Other mappings
