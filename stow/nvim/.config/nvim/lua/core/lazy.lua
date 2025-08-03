@@ -36,12 +36,6 @@ require('lazy').setup({
         'echasnovski/mini.files',
         version = false,
     },
-    {   -- note taking
-        "epwalsh/obsidian.nvim",
-        version = "*", -- recommended, use latest release
-        lazy = true,
-        ft = "markdown",
-    },
     { -- LSP Config + Plugins
         'neovim/nvim-lspconfig',
         dependencies = {

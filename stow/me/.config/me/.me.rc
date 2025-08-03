@@ -32,7 +32,3 @@ function setup_env() {
   fi
 }
 
-## NVIM
-function notes() {
-  nvim -c ":set wrap" -c ":ZenMode" -c ":ObsidianSearch"
-}
