@@ -1,24 +1,27 @@
--- load package manager + packages
-require('core.lazy')
-
--- My local config
+-- 1. My config for vanilla nvim, keybinds
 require('core.settings')
 require('core.keymaps')
 
--- plugins
-require('core.plugins.mini_files_config') -- file explorer
-require('core.plugins.harpoon')           -- Fast file switcher (C-a)
-require('core.plugins.lsp')               -- lsp
-require('core.plugins.noice')             -- noice (centered cmdline)
-require('core.plugins.nvim-cmp')          -- autocomplete
-require('core.plugins.fff')               -- Fast Fuzzy File Search
-require('core.plugins.treesitter')        -- nav fp
-require('core.plugins.telescope')         -- fuzzy searching
-require('core.plugins.ufo')               -- ufo folding
-require('core.plugins.zenmode')           -- zenmode
+-- load package manager + packages
+-- Install package manager
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system {
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+	lazypath
+    }
+end
 
--- TEMP ... trying out installs
-require('project_nvim').setup()
+-- proritize runtime path searches in lazy directory for docs
+vim.opt.rtp:prepend(lazypath)
+-- this will pull from all the files within the `core.plugins` folder
+require('lazy').setup('core.plugins')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
