@@ -106,5 +106,31 @@ return {
           },
         });
       end,
-    }
+    },
+    { "catppuccin/nvim", -- my preferred theme
+      name = "catppuccin",
+      priority = 1000,
+    },
+    { 'nvim-lualine/lualine.nvim', -- status
+      dependencies = { 'nvim-tree/nvim-web-devicons' }, -- add devicons plugin
+      opts = {
+        options = {
+        icons_enabled = true,
+        theme = 'catppuccin',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        },
+        sections = {
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_c = {
+            {
+              'filename',
+              file_status = true,
+              path = 3, -- show full path with ~ for home
+              shorting_target = 100,
+            }
+          },
+        },
+      },
+    },
 }
