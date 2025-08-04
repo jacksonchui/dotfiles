@@ -91,9 +91,8 @@ return {
       normal_leader_map('<space>', tb.buffers, '[ ] Search existing buffers')
 
       -- Custom Commands within 'M' Module
-      normal_leader_map('sc', M.find_config_files, '[S]earch my [C]onfig')
-      normal_leader_map('sf', M.find_files, '[S]earch [F]iles')
-      normal_leader_map('sg', M.live_grep, '[S]earch by [G]rep')
+      normal_leader_map('cc', M.find_config_files, '[S]earch my [C]onfig')
+      normal_leader_map('gg', M.live_grep, '[S]earch by [G]rep')
 
       -- Other mappings
       normal_leader_map('z', require("telescope").extensions.undo.undo, "UNDO: ctrl-z")

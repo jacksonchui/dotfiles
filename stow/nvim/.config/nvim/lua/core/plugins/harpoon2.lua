@@ -26,7 +26,7 @@ return {
 
     -- MARK: Functions
     vim.keymap.set("n", "<leader>m", function() harpoon:list():add() end, {desc = "[m]ark harpoon file"})
-    vim.keymap.set("n", "<leader>ht", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "[h]arpoon quick [t]oggle"})
+    vim.keymap.set("n", "<leader>H", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "[h]arpoon quick [t]oggle"})
     -- vim.keymap.set("n", "<leader>M", ":Telescope harpoon marks<CR>", {desc = "Show [h]arpoon [m]arks"}) -- doesn't persist through sessions
     vim.keymap.set("n", "<leader>M", function() toggle_telescope(harpoon:list()) end,    { desc = "Open harpoon window" })
 
